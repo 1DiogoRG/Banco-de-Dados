@@ -1,0 +1,112 @@
+[ALUNO] - Diogo Rodrigues
+
+PROJETO: Banco de Dados - Sistema Escolar (MariaDB)
+
+============================================================
+📦 CRIAÇÃO DO BANCO DE DADOS
+============================================================
+
+CREATE DATABASE escola;
+USE escola;
+
+============================================================
+🧑‍🎓 TABELA: Alunos
+============================================================
+
+CREATE TABLE alunos (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100) NOT NULL,
+    idade INT NOT NULL,
+    genero ENUM('M', 'F', 'Outro') NOT NULL
+);
+
+============================================================
+👩‍🏫 TABELA: Professores
+============================================================
+
+CREATE TABLE professores (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100) NOT NULL,
+    especialidade VARCHAR(100) NOT NULL
+);
+
+============================================================
+📚 TABELA: Disciplinas
+============================================================
+
+CREATE TABLE disciplinas (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100) NOT NULL,
+    carga_horaria INT NOT NULL
+);
+
+============================================================
+🏫 TABELA: Turmas
+============================================================
+
+CREATE TABLE turmas (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(50) NOT NULL,
+    ano INT NOT NULL
+);
+
+============================================================
+📝 TABELA: Matrículas
+============================================================
+
+CREATE TABLE matriculas (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    aluno_id INT NOT NULL,
+    turma_id INT NOT NULL,
+    disciplina_id INT NOT NULL,
+    FOREIGN KEY (aluno_id) REFERENCES alunos(id),
+    FOREIGN KEY (turma_id) REFERENCES turmas(id),
+    FOREIGN KEY (disciplina_id) REFERENCES disciplinas(id)
+);
+
+============================================================
+📥 INSERÇÃO DE DADOS
+============================================================
+
+-- Alunos
+INSERT INTO alunos (nome, idade, genero) VALUES
+('João Pedro', 17, 'M'),
+('Camila Rocha', 16, 'F'),
+('Osvaldo Lima', 16, 'M');
+
+-- Professores
+INSERT INTO professores (nome, especialidade) VALUES
+('Marcos Silva', 'Matemática'),
+('Juliana Costa', 'Português'),
+('Rafaela Costa', 'História');
+
+-- Disciplinas
+INSERT INTO disciplinas (nome, carga_horaria) VALUES
+('Matemática', 60),
+('Português', 60),
+('História', 40);
+
+-- Turmas
+INSERT INTO turmas (nome, ano) VALUES
+('1° Ano B', 2025),
+('2° Ano B', 2024);
+
+-- Matrículas
+INSERT INTO matriculas (aluno_id, turma_id, disciplina_id) VALUES
+(1, 1, 1),
+(1, 1, 2),
+(2, 2, 3),
+(3, 1, 1);
+
+============================================================
+🔎 CONSULTAS ÚTEIS
+============================================================
+
+-- Listar todos os registros
+SELECT * FROM alunos;
+SELECT * FROM professores;
+SELECT * FROM disciplinas;
+SELECT * FROM turmas;
+SELECT * FROM matriculas;
+
+============================================================
